@@ -1,0 +1,14 @@
+/* Page reset only. Hero, CoursesSection and Footer are Framer code components
+   that carry their own styles, so they stay self-contained when pasted in. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
