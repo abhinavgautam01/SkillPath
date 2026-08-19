@@ -3,9 +3,17 @@
 Landing page for a fake learning platform. The only part that matters is the
 courses section, which is a Framer code component that reads two live endpoints.
 
-`src/components/CoursesSection.jsx` is the deliverable. It is self-contained and
-pastes into Framer unmodified. The hero and footer here are stand-ins for what
-gets built on the Framer canvas.
+Live: https://left-peach-124507-573c385cc.framer.app
+
+All three sections are Framer code components, so what runs locally is the same
+code that runs on the published site. Each file is self-contained and pastes
+into Framer unmodified.
+
+| File | Role |
+| --- | --- |
+| `src/components/CoursesSection.jsx` | The graded section. Two live endpoints, four states, the currency logic |
+| `src/components/Hero.jsx` | Headline, subline, button. No data, no state |
+| `src/components/Footer.jsx` | Three links and a copyright line |
 
 ## Running it
 
@@ -65,6 +73,15 @@ that visibly is not in order. Switching currency re-sorts.
 **Prices divide by 100.** `pricePaise` and `priceUsdCents` are both minor units,
 so 199900 paise is ₹1,999 and 3999 cents is $39.99. `Intl.NumberFormat` does the
 grouping because Indian digits group 2-2-3 above a thousand, not 3-3-3.
+
+**The first render is deliberately not the correct column count.** Framer server
+renders published pages. Seeding the width from `window.innerWidth` made the
+client's first render disagree with the server's on any narrow screen, and React
+answered with "Hydration failed because the server rendered HTML didn't match
+the client", throwing the whole section away and rebuilding it on every phone
+visit. The seed is now a constant, so both renders agree and the observer
+corrects the width on mount. The cost is a possible one frame of desktop columns
+on a phone, which is cheaper than losing the server render.
 
 **Columns come from a `ResizeObserver` on the section, not media queries.**
 Inline styles cannot hold media queries inside a Framer code component, and
