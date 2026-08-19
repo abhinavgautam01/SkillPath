@@ -236,7 +236,7 @@ function useElementWidth(ref) {
       if (!entry) return
       // Border box, not contentRect. contentRect subtracts the section's own
       // horizontal padding, which would put every breakpoint 48px out of step
-      // with the window.innerWidth seed above.
+      // with the widths the constants above are written against.
       const borderBox = entry.borderBoxSize?.[0]?.inlineSize
       setWidth(borderBox ?? node.getBoundingClientRect().width)
     })
